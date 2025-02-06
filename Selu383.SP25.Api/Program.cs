@@ -22,18 +22,6 @@ namespace Selu383.SP25.Api
                     {
                         Version = "v1",
                         Title = "Development API",
-                        Description = "An ASP.NET Core Web API for managing ToDo items",
-                        TermsOfService = "https://example.com/terms",
-                        Contact = new OpenApiContact
-                        {
-                            Name = "Example Contact",
-                            Url = "https://example.com/contact"
-                        },
-                        License = new OpenApiLicense
-                        {
-                            Name = "Example License",
-                            Url = "https://example.com/license"
-                        }
                     };
                 };
             });
