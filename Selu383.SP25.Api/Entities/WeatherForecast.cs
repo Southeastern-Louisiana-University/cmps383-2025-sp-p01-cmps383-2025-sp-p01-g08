@@ -1,4 +1,4 @@
-namespace Selu383.SP25.Api
+namespace Selu383.SP25.Api.Entities
 {
     public class WeatherForecast
     {

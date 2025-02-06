@@ -17,10 +17,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
+    <PackageReference Include="NSwag.AspNetCore" Version="14.2.0" />
   </ItemGroup>
 
 </Project>
