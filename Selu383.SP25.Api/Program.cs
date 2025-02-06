@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Selu383.SP25.Api
 {
@@ -8,6 +10,9 @@ namespace Selu383.SP25.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddDbContext<DbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext") ?? throw new InvalidOperationException("Connection string 'DbContext' not found.")));
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
