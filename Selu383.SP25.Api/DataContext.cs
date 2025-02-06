@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace Selu383.SP25.Api
 {
@@ -8,5 +9,7 @@ namespace Selu383.SP25.Api
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SP25-P01-G08;Trusted_Connection=True");
         }
+
+        public DbSet<WeatherForecast> WeatherForecasts { get; set; }
     }
 }
