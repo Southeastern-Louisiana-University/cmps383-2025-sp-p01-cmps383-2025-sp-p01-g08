@@ -14,6 +14,7 @@
         public string Address { get; set; }
         public int SeatCount { get; set; }
     }
+
     public class TheaterUpdateDto
     {
         public string Name { get; set; }
