@@ -1,6 +1,4 @@
-﻿using System.Web.Http;
-using System.Web.Http.Description;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Selu383.SP25.Api.Entities;
 
@@ -8,25 +6,30 @@ namespace Selu383.SP25.Api.Controllers
 
 {
     [ApiController]
-    [Microsoft.AspNetCore.Mvc.Route("[controller]")]
-    public class TheaterController : Controller
+    [Route("api/[controller]")]
+    public class TheaterController : ControllerBase
     {
-        private MyDataContext db;
+            private readonly MyDataContext _db;
 
-        // GET api/Theaters
-        [Microsoft.AspNetCore.Mvc.HttpGet(Name = "GetTheaterDto")]
-        public IQueryable<TheaterDto> GetTheaters()
-        {
-            var theaters = from b in db.Theaters
-                        select new TheaterDto()
-                        {
-                            Id = b.Id,
-                            Name = b.Name,
-                            Address = b.Address,
-                            seatCount = b.seatCount,
-                        };
+            public TheaterController(MyDataContext db)
+            {
+                _db = db;
+            }
 
-            return theaters;
+            // GET api/Theaters
+            [HttpGet]
+            public IActionResult GetAll()
+            {
+            var theaters = _db.Theaters 
+                .Select(b => new Theater
+                {
+                    Id = b.Id,
+                    Name = b.Name,
+                    Address = b.Address,
+                    SeatCount = b.SeatCount,
+                }).ToList();
+
+                return Ok(theaters);
+            }
         }
-    }
-}
+     }

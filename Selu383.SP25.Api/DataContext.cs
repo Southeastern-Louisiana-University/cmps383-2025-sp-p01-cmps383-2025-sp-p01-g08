@@ -1,36 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.Metrics;
+using Microsoft.EntityFrameworkCore;
 using Selu383.SP25.Api.Entities;
-using System.Reflection.Metadata;
+using Selu383.SP25.Api.NewFolder;
 
 namespace Selu383.SP25.Api
 {
     public class MyDataContext : DbContext
     {
-
         public MyDataContext(DbContextOptions<MyDataContext> options) : base(options)
         {
-
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SP25-P01-G08;Trusted_Connection=True");
         }
 
-        public DbSet<WeatherForecast> WeatherForecasts { get; set; }
-        public DbSet<TheaterDto> Theaters { get; set; }
+        public DbSet<Theater> Theaters { get; set; }
 
-        public static void SeedData(MyDataContext context)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            if (!context.Theaters.Any()) // Avoid duplicate seeding
-            {
-                context.Theaters.AddRange(new List<TheaterDto>
-            {
-                new TheaterDto { Id = 1, Name = "Santikos", Address = "Slidell", seatCount = 20 },
-                new TheaterDto { Id = 2, Name = "AMC", Address = "Hammond", seatCount = 30 },
-                });
+            base.OnModelCreating(modelBuilder);
 
-                context.SaveChanges();
-            }
+            modelBuilder.Entity<Theater>(b =>
+            {
+                b.Property(x => x.Id).IsRequired();
+            });
+
+            // Seeding data for Country
+            modelBuilder.Entity<Theater>().HasData(
+                new Theater { Id = 1, Name = "Santikos", Address = "Slidell", SeatCount = 20 },
+                new Theater { Id = 2, Name = "Regal", Address = "Covington", SeatCount = 30 },
+                new Theater { Id = 3, Name = "AMC", Address = "Hammond", SeatCount = 40 }
+            );
         }
     }
 }
