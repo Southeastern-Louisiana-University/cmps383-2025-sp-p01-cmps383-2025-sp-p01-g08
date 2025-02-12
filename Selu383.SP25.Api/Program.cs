@@ -1,9 +1,4 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using System.Reflection.Metadata;
-using Microsoft.OpenApi.Models;
-using Selu383.SP25.Api.Controllers;
 
 
 namespace Selu383.SP25.Api
@@ -14,7 +9,7 @@ namespace Selu383.SP25.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<MyDataContext>(options =>
+            builder.Services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MyDataContext")));
 
             // Add services to the container.
@@ -30,7 +25,7 @@ namespace Selu383.SP25.Api
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<MyDataContext>();
+                var context = services.GetRequiredService<DataContext>();
                 context.Database.Migrate();
             }
 

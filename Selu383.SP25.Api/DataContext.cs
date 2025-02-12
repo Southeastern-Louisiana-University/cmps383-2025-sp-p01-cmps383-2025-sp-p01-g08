@@ -1,13 +1,11 @@
-﻿using System.Diagnostics.Metrics;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Selu383.SP25.Api.Entities;
-using Selu383.SP25.Api.NewFolder;
 
 namespace Selu383.SP25.Api
 {
-    public class MyDataContext : DbContext
+    public class DataContext : DbContext
     {
-        public MyDataContext(DbContextOptions<MyDataContext> options) : base(options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
 
@@ -15,19 +13,16 @@ namespace Selu383.SP25.Api
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Theater>(b =>
             {
-                b.Property(x => x.Id).IsRequired();
+                b.HasKey(x => x.Id);
+                b.HasData( // This inserts initial records into the database
+                    new Theater { Id = 1, Name = "The Grand Slidell Santikos", Address = "Slidell, LA", SeatCount = 250 },
+                    new Theater { Id = 2, Name = "AMC Hammond Palace 10", Address = "Hammond, LA", SeatCount = 300 },
+                    new Theater { Id = 3, Name = "Regal Covington Stadium 14", Address = "Covington, LA", SeatCount = 150 },
+                    new Theater { Id = 4, Name = "AMC Mall of Louisiana 15", Address = "Baton Rouge, LA", SeatCount = 250 }
+                );
             });
-
-            // Seeding data for Country
-            modelBuilder.Entity<Theater>().HasData(
-                new Theater { Id = 1, Name = "Santikos", Address = "Slidell", SeatCount = 20 },
-                new Theater { Id = 2, Name = "Regal", Address = "Covington", SeatCount = 30 },
-                new Theater { Id = 3, Name = "AMC", Address = "Hammond", SeatCount = 40 }
-            );
         }
     }
 }
