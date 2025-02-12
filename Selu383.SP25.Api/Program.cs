@@ -10,7 +10,7 @@ namespace Selu383.SP25.Api
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("MyDataContext")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DataContext")));
 
             // Add services to the container.
 
