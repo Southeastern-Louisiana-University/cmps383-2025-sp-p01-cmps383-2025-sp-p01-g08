@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-
+using Selu383.SP25.Api.Entities;
 
 namespace Selu383.SP25.Api
 {
@@ -10,8 +10,7 @@ namespace Selu383.SP25.Api
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DataContext")));
-
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DataContext") ?? throw new InvalidOperationException("Connection string 'DataContext' not found.")));
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -27,6 +26,13 @@ namespace Selu383.SP25.Api
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<DataContext>();
                 context.Database.Migrate();
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                SeedData.Initialize(services);
             }
 
             if (app.Environment.IsDevelopment())

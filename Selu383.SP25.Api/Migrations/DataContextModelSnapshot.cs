@@ -21,23 +21,6 @@ namespace Selu383.SP25.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Selu383.SP25.Api.Entities.Hotel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Hotels");
-                });
-
             modelBuilder.Entity("Selu383.SP25.Api.Entities.Theater", b =>
                 {
                     b.Property<int>("Id")
@@ -60,36 +43,6 @@ namespace Selu383.SP25.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Theaters");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Slidell, LA",
-                            Name = "The Grand Slidell Santikos",
-                            SeatCount = 250
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Hammond, LA",
-                            Name = "AMC Hammond Palace 10",
-                            SeatCount = 300
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "Covington, LA",
-                            Name = "Regal Covington Stadium 14",
-                            SeatCount = 150
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "Baton Rouge, LA",
-                            Name = "AMC Mall of Louisiana 15",
-                            SeatCount = 250
-                        });
                 });
 #pragma warning restore 612, 618
         }

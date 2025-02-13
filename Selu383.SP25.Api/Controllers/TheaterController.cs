@@ -54,6 +54,8 @@ namespace Selu383.SP25.Api.Controllers
             if (string.IsNullOrWhiteSpace(dto.Name)) return BadRequest();
             if (dto.Name.Length > 120) return BadRequest();
             if (string.IsNullOrWhiteSpace(dto.Address)) return BadRequest();
+            if (dto.SeatCount == null || dto.SeatCount == 0) return BadRequest();
+
             var entity = new Theater
             {
                 Name = dto.Name,

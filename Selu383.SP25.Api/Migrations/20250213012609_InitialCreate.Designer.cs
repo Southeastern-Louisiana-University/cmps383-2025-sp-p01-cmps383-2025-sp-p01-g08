@@ -11,7 +11,7 @@ using Selu383.SP25.Api;
 namespace Selu383.SP25.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250212041054_InitialCreate")]
+    [Migration("20250213012609_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -46,36 +46,6 @@ namespace Selu383.SP25.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Theaters");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Slidell, LA",
-                            Name = "The Grand Slidell Santikos",
-                            SeatCount = 250
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Hammond, LA",
-                            Name = "AMC Hammond Palace 10",
-                            SeatCount = 300
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "Covington, LA",
-                            Name = "Regal Covington Stadium 14",
-                            SeatCount = 150
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "Baton Rouge, LA",
-                            Name = "AMC Mall of Louisiana 15",
-                            SeatCount = 250
-                        });
                 });
 #pragma warning restore 612, 618
         }
