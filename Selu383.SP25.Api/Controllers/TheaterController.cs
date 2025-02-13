@@ -7,7 +7,7 @@ using Selu383.SP25.Api.DTO;
 namespace Selu383.SP25.Api.Controllers
 {
     [ApiController]
-    [Route("api/theaters")]
+    [Route("/api/theaters")]
     public class TheatersController : ControllerBase
     {
         private readonly DataContext _db;
